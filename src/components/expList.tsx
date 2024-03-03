@@ -1,13 +1,27 @@
 import { useEffect, useState } from "react";
-
-interface Experiment {
-  id: number;
-  name: string;
-  size: number;
-}
+import type { Experiment } from "@/pages/dash";
+import Link from "next/link"; // Added import for Link from Next.js
 
 const ExpList = () => {
   const [experiments, setExperiments] = useState<Experiment[]>([]);
+
+  const handleDelete = async (id: string) => {
+    try {
+      let prevExps = experiments;
+      const response = await fetch(`/api/exps/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log(`Experiment with ID ${id} deleted successfully.`);
+      } else {
+        console.error(`Failed to delete experiment with ID ${id}.`);
+      }
+      setExperiments(prevExps => prevExps.filter(exp => exp.id !== id));
+    } catch (error) {
+      console.error('An error occurred while deleting the experiment:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchExperiments = async () => {
@@ -25,11 +39,14 @@ const ExpList = () => {
         <li key={experiment.id} className="border-b border-gray-200 py-2">
           <div className="flex justify-between" key={experiment.id}>
             <span>
-              <b>{experiment.name}</b> w. {experiment.size} plates
+              <Link href={`/exps/${experiment.id}`}>
+                <b>{experiment.name}</b>
+              </Link>{" "}
+              w. {experiment.size} plates
             </span>
             <button
               className="text-red-500"
-              // onClick={() => handleDelete(experiment.id)}
+              onClick={() => handleDelete(experiment.id)}
             >
               delete
             </button>

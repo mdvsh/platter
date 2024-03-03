@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      const exps = await sql`SELECT * FROM plate`;
+      const exps = await sql`SELECT * FROM experiments`;
       res.status(200).json(exps.rows);
     } catch (error) {
       const errorMessage = (error instanceof Error) ? error.message : 'Unknown error';
@@ -12,8 +12,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   } else if (req.method === 'POST') {
     try {
-      const name = req.query.name as string;
-      const size = parseInt(req.query.size as string);
+      let name, size;
+      if (req.query.name && req.query.size) {
+        name = req.query.name as string;
+        size = parseInt(req.query.size as string);
+      } else {
+        name = req.body.name;
+        size = req.body.size;
+      }
       if (!name || !size) {
         return res.status(400).json({ message: 'Experiment name and plate size required.' });
       }
@@ -21,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ message: 'Invalid plate size. Plate size must be 96 or 384.' });
       }
       const result = await sql`
-        INSERT INTO plate (name, size)
+        INSERT INTO experiments (name, size)
         VALUES (${name}, ${size})
         RETURNING *;
       `;
