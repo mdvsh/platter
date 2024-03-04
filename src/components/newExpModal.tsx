@@ -64,13 +64,14 @@ function ExperimentModal({
             onChange={(e) => setName(e.target.value)}
             className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
           />
-          <input
-            type="number"
-            placeholder="Size"
+          <select
             value={size}
             onChange={(e) => setSize(e.target.value)}
             className="mb-4 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
-          />
+          >
+            <option value="96">96</option>
+            <option value="384">384</option>
+          </select>
           {errorMessage && (
             <div className="text-red-500 mb-4">{errorMessage}</div>
           )}{" "}

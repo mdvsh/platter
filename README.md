@@ -2,6 +2,31 @@
 ### sphinx bio take home challenge - platter
 > Madhav Sharma
 
+#### stack
+
+- react through nextjs with tailwindcss for the frontend
+- nextjs with a edge postgres instance powered by neon
+  - exposing a public API too, ingested inside the app + maximal use of SSR and CSR features to increase performance
+- deployed and scaled with vercel
+
+#### features
+
+- everything in the challenge PDF
+- performant CRUD : plate + wells
+- type-safe + form and database validation
+- intuitive UI, click on empty wells to create a new one there; click on existing ones to modify;
+- minimizes queries with CS caches and connections through pooling in the db
+- sphinx themed : )
+- easter eggs 😳 ?
+
+`/api/exps/<uuid>` for experiment/plate CRUD
+
+`api/wells/<comb_id>` for well CRUD, `comb_id` is a composite uuid based on row-col-and-plate-key
+
+This was a lot of fun to build, I have ideas on how to improve this app and would love to talk more about my design choices and future extras on a call : )
+
+_talk soon_!
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
