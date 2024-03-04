@@ -23,8 +23,14 @@ export default async function handler(
       `;
       res.status(201).json(result.rows[0]);
     } catch (error: any) {
-      const errorMessage = (error instanceof Error) ? error.message : 'Unknown error';
-      res.status(500).json({ message: 'Failed to add well information', error: errorMessage });
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      res
+        .status(500)
+        .json({
+          message: "Failed to add well information",
+          error: errorMessage,
+        });
     }
   } else {
     res.setHeader("Allow", ["POST"]);

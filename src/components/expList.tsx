@@ -9,7 +9,7 @@ const ExpList = () => {
     try {
       let prevExps = experiments;
       const response = await fetch(`/api/exps/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
@@ -17,9 +17,9 @@ const ExpList = () => {
       } else {
         console.error(`Failed to delete experiment with ID ${id}.`);
       }
-      setExperiments(prevExps => prevExps.filter(exp => exp.id !== id));
+      setExperiments((prevExps) => prevExps.filter((exp) => exp.id !== id));
     } catch (error) {
-      console.error('An error occurred while deleting the experiment:', error);
+      console.error("An error occurred while deleting the experiment:", error);
     }
   };
 

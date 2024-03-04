@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -11,8 +11,9 @@ const Navbar = () => {
           <span className="ml-3 text-xl tracking-wider">Platter</span>
         </Link>
         <nav className="ml-auto flex flex-wrap items-center text-base justify-center md:flex-col md:items-start">
-          <Link href="/dash" className="mr-5 hover:text-gray-900" >Dashboard</Link>
-          {/* <Link href="/logout" className="mr-5 hover:text-gray-900 bg-gray-300 rounded-lg px-3 py-1">Logout</Link> */}
+          <Link href="/dash" className="mr-5 hover:text-gray-900">
+            Dashboard
+          </Link>
         </nav>
       </div>
     </header>

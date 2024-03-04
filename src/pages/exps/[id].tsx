@@ -34,7 +34,7 @@ export default function Page({
     col: -1,
     reagent: "",
     antibody: "",
-    concentration: -1, 
+    concentration: -1,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [wells, setWells] = useState(data.wells);
@@ -85,7 +85,9 @@ export default function Page({
       return;
     }
 
-    const endpoint = isEditing ? `/api/wells/${newWell.comp_id}` : `/api/wells/create`;
+    const endpoint = isEditing
+      ? `/api/wells/${newWell.comp_id}`
+      : `/api/wells/create`;
     const method = isEditing ? "PUT" : "POST";
 
     try {
@@ -101,7 +103,9 @@ export default function Page({
         const newWellData = await response.json();
         if (isEditing) {
           setWells(
-            wells.map((well) => (well.comp_id === newWellData.comp_id ? newWellData : well))
+            wells.map((well) =>
+              well.comp_id === newWellData.comp_id ? newWellData : well
+            )
           );
         } else {
           setWells((prevWells) => [...prevWells, newWellData]);
@@ -118,21 +122,21 @@ export default function Page({
   };
 
   const handleDeleteWell = async (wellId: string) => {
-  console.log("id: " + wellId);
-  try {
-    const response = await fetch(`/api/wells/${wellId}`, {
-      method: "DELETE",
-    });
+    console.log("id: " + wellId);
+    try {
+      const response = await fetch(`/api/wells/${wellId}`, {
+        method: "DELETE",
+      });
 
-    if (response.ok) {
-      setWells((wells) => wells.filter((well) => well.comp_id !== wellId));
-    } else {
-      console.error("Failed to delete well.");
+      if (response.ok) {
+        setWells((wells) => wells.filter((well) => well.comp_id !== wellId));
+      } else {
+        console.error("Failed to delete well.");
+      }
+    } catch (error) {
+      console.error("Error deleting well:", error);
     }
-  } catch (error) {
-    console.error("Error deleting well:", error);
-  }
-  }
+  };
 
   const handleWellClick = (well: WellType) => {
     setNewWell({
@@ -145,8 +149,6 @@ export default function Page({
       concentration: well.concentration,
     });
   };
-
-
 
   return (
     <section className="text-gray-700 body-font">

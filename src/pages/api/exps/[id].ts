@@ -8,8 +8,8 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const { id } = req.query;
-      if (typeof id !== 'string') {
-        return res.status(400).json({ message: 'Invalid id parameter' });
+      if (typeof id !== "string") {
+        return res.status(400).json({ message: "Invalid id parameter" });
       }
       const result = await sql`
       SELECT * FROM experiments
@@ -19,7 +19,7 @@ export default async function handler(
         return res.status(404).json({ message: "Experiment not found" });
       }
       const wells = await sql`SELECT * FROM wells WHERE plate_id = ${id}`;
-      res.status(200).json({experiment: result.rows[0], wells: wells.rows});
+      res.status(200).json({ experiment: result.rows[0], wells: wells.rows });
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
@@ -30,8 +30,8 @@ export default async function handler(
   } else if (req.method === "DELETE") {
     try {
       const { id } = req.query;
-      if (typeof id !== 'string') {
-        return res.status(400).json({ message: 'Invalid id parameter' });
+      if (typeof id !== "string") {
+        return res.status(400).json({ message: "Invalid id parameter" });
       }
       const result = await sql`
         DELETE FROM experiments
@@ -47,9 +47,8 @@ export default async function handler(
       res
         .status(500)
         .json({ message: "Failed to delete experiment", error: errorMessage });
-    } 
-  }
-  else {
+    }
+  } else {
     return res.status(405).json({ message: "Method not allowed" });
   }
 }

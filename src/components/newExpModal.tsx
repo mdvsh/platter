@@ -11,7 +11,7 @@ function ExperimentModal({
   onSuccess: (data: Experiment) => void;
 }) {
   const [name, setName] = useState("");
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState("96");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +29,7 @@ function ExperimentModal({
       onSuccess(newExperiment);
     } else {
       console.error("Experiment creation failed");
-      response.json().then(data => setErrorMessage(data.message));
+      response.json().then((data) => setErrorMessage(data.message));
     }
   };
 

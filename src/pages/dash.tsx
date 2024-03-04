@@ -28,8 +28,8 @@ const Dashboard = () => {
   const router = useRouter();
   const handleSuccessfulNewExp = (newExp: Experiment) => {
     setModalOpen(false);
-    router.push(`/exps/${newExp.id}`)
-  }
+    router.push(`/exps/${newExp.id}`);
+  };
 
   return (
     <section className="text-gray-700 body-font">
@@ -64,17 +64,19 @@ const Dashboard = () => {
         </div>
         <ExpList />
       </div>
-    <div className="flex justify-center">
-      <button
-        onClick={() => setModalOpen(true)}
-        className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded my-8">
-        Create New Experiment
-      </button>
-      <ExperimentModal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        onSuccess={handleSuccessfulNewExp} />
-    </div>
+      <div className="flex justify-center">
+        <button
+          onClick={() => setModalOpen(true)}
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded my-8"
+        >
+          Create New Experiment
+        </button>
+        <ExperimentModal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          onSuccess={handleSuccessfulNewExp}
+        />
+      </div>
     </section>
   );
 };
