@@ -74,7 +74,6 @@ function ExperimentModal({
           {errorMessage && (
             <div className="text-red-500 mb-4">{errorMessage}</div>
           )}{" "}
-          {/* Step 3: Display error message */}
           <div className="flex justify-between items-center">
             <button
               type="submit"

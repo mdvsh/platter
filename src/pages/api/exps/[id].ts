@@ -18,8 +18,8 @@ export default async function handler(
       if (result.rows.length === 0) {
         return res.status(404).json({ message: "Experiment not found" });
       }
-      const wells = await sql`SELECT * FROM well WHERE plate_id = ${id}`;
-      res.status(200).json(result.rows[0]);
+      const wells = await sql`SELECT * FROM wells WHERE plate_id = ${id}`;
+      res.status(200).json({experiment: result.rows[0], wells: wells.rows});
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";

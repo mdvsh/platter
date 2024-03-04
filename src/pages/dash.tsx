@@ -4,11 +4,11 @@ import ExperimentModal from "@/components/newExpModal";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export interface Well {
+export interface WellType {
   id: string;
   comp_id: string;
-  row: string;
-  col: number;
+  row: string; // A, B, C
+  col: number; // 1, 2, 3
   reagent: string;
   antibody: string;
   concentration: number;
@@ -19,7 +19,7 @@ export interface Experiment {
   id: string;
   name: string;
   size: number;
-  wells: Well[];
+  wells: WellType[];
 }
 
 const Dashboard = () => {
