@@ -30,7 +30,10 @@ export default async function handler(
     if (typeof id !== "string") {
       return res.status(400).json({ message: "Invalid id parameter" });
     }
-    const { reagent, antibody, concentration } = req.body;
+    const { row, col, reagent, antibody, concentration } = req.body;
+    // if (row && col) {
+    //   return res.status(400).json({ message: "Please don't change existing well key.", error: "DB Key error" });
+    // }
     try {
       const result = await sql`
       UPDATE wells
